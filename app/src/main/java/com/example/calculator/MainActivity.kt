@@ -1,18 +1,33 @@
 package com.example.calculator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     private var canAddOperation = false
     private var canAddDecimal = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Intent
+
+        val databaseBtn = findViewById<Button>(R.id.historybtn)
+        databaseBtn.setOnClickListener {
+            Log.i("working data is ", workingtv.text.toString())
+            Log.i("result data is ", resultTv.text.toString())
+            val intent = Intent(this,HistoryActivity::class.java)
+            intent.putExtra("workingtv",workingtv.text.toString())
+            intent.putExtra("resultTv",resultTv.text.toString())
+            startActivity(intent)
+        }
     }
 
     fun allClearAction(view: View) {
@@ -99,9 +114,11 @@ class MainActivity : AppCompatActivity() {
             if (character.isDigit() || character == '.'){
                 currDigit += character
             }else{
-                list.add(currDigit.toFloat())
-                currDigit = ""
-                list.add(character)
+                if(currDigit.isNotEmpty()) {
+                    list.add(currDigit.toFloat())
+                    currDigit = ""
+                    list.add(character)
+                }
             }
         }
         if (currDigit != "")
@@ -136,4 +153,5 @@ class MainActivity : AppCompatActivity() {
             canAddOperation = true
         }
     }
+
 }

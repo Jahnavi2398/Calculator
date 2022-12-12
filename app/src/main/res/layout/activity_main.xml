@@ -60,8 +60,10 @@
             android:onClick="backSpaceAction"
             android:text="⌫" />
         <Button
+            android:id="@+id/historybtn"
             style="@style/buttonNumber"
-            android:text=" "/>
+            android:textColor="@color/red"
+            android:text="Db"/>
         <Button
             style="@style/buttonOperator"
             android:text="/"/>
