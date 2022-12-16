@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MyAdapter (val finalList: ArrayList<String>):RecyclerView.Adapter<ViewHolder>(){
-    private var list:ArrayList<String> = finalList
+class MyAdapter (val finalList: List<CalculatorEntity>):RecyclerView.Adapter<ViewHolder>(){
+    private var list:List<CalculatorEntity> = finalList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ViewHolder {
         val inflater : LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.history_calc,parent,false)
@@ -15,7 +15,7 @@ class MyAdapter (val finalList: ArrayList<String>):RecyclerView.Adapter<ViewHold
     }
 
     override fun onBindViewHolder(holder:ViewHolder, position: Int) {
-        holder.result.text = list[position]
+        holder.result.text = list[position].text
     }
     override fun getItemCount(): Int {
        return list.size

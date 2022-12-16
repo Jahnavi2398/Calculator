@@ -6,11 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = arrayOf(Calc_Entity::class) , version = 1 , exportSchema = false)
+@Database(entities = arrayOf(CalculatorEntity::class) , version = 1 , exportSchema = false)
+abstract class CalculatorDatabase:RoomDatabase(){
 
-abstract class CalculatorDatabase : RoomDatabase(){
-
-    abstract fun getDao() : CalculatorDao
+    abstract fun getDao():CalculatorDao
 
     companion object{
         // Singleton object

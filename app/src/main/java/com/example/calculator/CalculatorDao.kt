@@ -6,12 +6,12 @@ import androidx.room.*
 interface CalculatorDao{
 
     @Insert
-    suspend fun insert(history : Calc_Entity)
+    suspend fun insert(history : CalculatorEntity)
 
     @Delete
-    suspend fun delete(history: Calc_Entity)
+    suspend fun delete(history: CalculatorEntity)
 
     @Query("Select * from calcHistory_table order by id ASC")
-    fun getAllHistory() : List<Calc_Entity>
+    fun getAllHistory() : List<CalculatorEntity>
 
 }

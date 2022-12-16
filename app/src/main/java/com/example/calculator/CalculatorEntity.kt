@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 // Created Entity (Table)
 
 @Entity(tableName = "calcHistory_table")
-class Calc_Entity (@ColumnInfo(name = "text")var text :String){
+class CalculatorEntity(@ColumnInfo(name = "text") var text :String){
     @PrimaryKey(autoGenerate = true)var id = 0
 }
+

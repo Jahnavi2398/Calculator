@@ -3,24 +3,32 @@ package com.example.calculator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private var canAddOperation = false
     private var canAddDecimal = true
+    lateinit var viewModel : CalculatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(CalculatorViewModel::class.java)
 
         // Intent
 
-        val databaseBtn = findViewById<Button>(R.id.historybtn)
-        databaseBtn.setOnClickListener {
+        historybtn.setOnClickListener {
+
+            if(!(TextUtils.isEmpty(workingtv.text.toString().trim()) || TextUtils.isEmpty(resultTv.text.toString().trim()))){
+                val history = CalculatorEntity(workingtv.text.toString() + " = " + resultTv.text.toString())
+                viewModel.insertHistory(history)
+            }
             Log.i("working data is ", workingtv.text.toString())
             Log.i("result data is ", resultTv.text.toString())
             val intent = Intent(this,HistoryActivity::class.java)
@@ -30,15 +38,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    override fun OnResume(){
+//        super.onResume()
+//        workingtv.text = ""
+//        resultTv.text = ""
+//        workingtv.requestFocus()
+//    }
+
     fun allClearAction(view: View) {
         workingtv.text = ""
         resultTv.text = ""
     }
     fun equalsAction(view: View) {
-        resultTv.text = CalculateResults()
+        resultTv.text = calculateResults()
     }
 
-    private fun CalculateResults():String{
+    private fun calculateResults():String{
         val digitOperators = digitOperators()
         if (digitOperators.isEmpty())
             return ""
@@ -51,7 +66,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun addSubtractCalc(passedList: MutableList<Any>): Float {
+    fun addSubtractCalc(passedList: MutableList<Any>): Float {
+        if (passedList.isEmpty()){
+            return 0.0f
+        }
+        if (!(passedList[0] is Float)){
+            return 0.0f
+        }
         var result = passedList[0] as Float
 
         for (i in passedList.indices){
@@ -66,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
         return result
     }
+
 
     private fun timeDivisionCalc(passedList : MutableList<Any>) : MutableList<Any>{
         var list = passedList

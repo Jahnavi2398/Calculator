@@ -10,8 +10,13 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
+    //@Test
+//    fun addition_isCorrect() {
+//        var calculationhelper = calculationhelper()
+//
+//        var stringinput:MutableList<Any> = mutableListOf(20,'+',10)
+//       // calculationhelper.addSubtractCalc(stringinput)
+//        assertEquals(0.0f,calculationhelper.addSubtractCalc(stringinput))
+//
+//    }
 }

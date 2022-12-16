@@ -1,44 +1,29 @@
 package com.example.calculator
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calculator.databinding.ActivityListBinding
 import kotlinx.android.synthetic.main.activity_list.*
 
-private const val TAG = "HistoryCalculation"
+
 
 class HistoryActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityListBinding
-
-    var worktv: String? = ""
-    var resultingTv: String? = ""
+    lateinit var viewModel: CalculatorViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_list)
 
-        val preferences = getSharedPreferences("myPref", MODE_PRIVATE)
-        val editor = preferences.edit()
-        val extras = intent.extras
+        viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(CalculatorViewModel::class.java)
 
-        if (extras != null) {
-            worktv = extras.getString("workingtv")
-            resultingTv = extras.getString("resultTv")
-            // and get whatever type user account id is
-        }
-        lateinit var list:ArrayList<String>
+        val list:List<CalculatorEntity> = viewModel.allHistory
 
-        editor.apply {
-            val str = worktv + "=" + resultingTv
-            putString("FinalResult", str)
-            list = ArrayList<String>()
-            list.add(str)
-        }
-
+        if (list.isEmpty())
+            noDataTv.visibility = View.VISIBLE
 
         recycleview.adapter = MyAdapter(list)
         recycleview.layoutManager = LinearLayoutManager(this)
