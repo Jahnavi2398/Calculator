@@ -23,9 +23,4 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         repository.insert(history)
     }
 
-//    fun addSubtractCalc(passedList: MutableList<Any>): Float {
-//       var calculationhelper = calculationhelper()
-//        return calculationhelper.addSubtractCalc(passedList)
-//    }
-
 }

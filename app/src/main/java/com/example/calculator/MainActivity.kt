@@ -92,6 +92,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        workingtv.text = ""
+        resultTv.text = ""
+    }
+
 
     fun allClearAction(view: View) {
         workingtv.text = ""
