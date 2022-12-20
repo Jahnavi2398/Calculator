@@ -1,6 +1,11 @@
 package com.example.calculator
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.Notification
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +14,7 @@ import android.view.View
 import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadLocate()
         setContentView(R.layout.activity_main)
+
+
+        val actionBar = supportActionBar
+        actionBar!!.title = resources.getString(R.string.app_name)
+
         viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(CalculatorViewModel::class.java)
 
         // Intent
@@ -36,14 +48,50 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("resultTv",resultTv.text.toString())
             startActivity(intent)
         }
+
+        //handling languages
+
+        val listItems = arrayOf("English","Hindi","Punjabi")
+
+        val mBuilder = AlertDialog.Builder(this@MainActivity)
+        mBuilder.setTitle("Choose Preferred Language")
+        mBuilder.setSingleChoiceItems(listItems,-1){ dialog , which ->
+            if (which == 0){
+                setLocate("en")
+                recreate()
+            }else if (which == 1){
+                setLocate("hi")
+                recreate()
+            }else if (which == 2){
+                setLocate("pa")
+                recreate()
+            }
+            dialog.dismiss()
+        }
+        val mDialog = mBuilder.create()
+        mDialog.show()
     }
 
-//    override fun OnResume(){
-//        super.onResume()
-//        workingtv.text = ""
-//        resultTv.text = ""
-//        workingtv.requestFocus()
-//    }
+    private fun setLocate(Lang: String) {
+        val locale = Locale(Lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config , baseContext.resources.displayMetrics)
+
+        val editor = getSharedPreferences("Settings" ,Context.MODE_PRIVATE).edit()
+        editor.putString("My_Lang" ,Lang)
+        editor.apply()
+    }
+
+    private fun loadLocate(){
+        val sharedPreferences = getSharedPreferences("Settings" ,Activity.MODE_PRIVATE)
+        val language = sharedPreferences.getString("My_Lang","")
+        if (language != null) {
+            setLocate(language)
+        }
+    }
+
 
     fun allClearAction(view: View) {
         workingtv.text = ""
@@ -175,5 +223,7 @@ class MainActivity : AppCompatActivity() {
             canAddOperation = true
         }
     }
+
+
 
 }

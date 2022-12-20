@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".MainActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -53,17 +54,18 @@
             style="@style/buttonNumber"
             android:textColor="@color/red"
             android:onClick="allClearAction"
-            android:text="AC"/>
+            android:text="@string/ac"/>
+        <Button
+            android:id="@+id/historybtn"
+            style="@style/buttonNumber"
+            android:textColor="@color/red"
+            android:text="@string/db"/>
         <Button
             style="@style/buttonNumber"
             android:textColor="@color/red"
             android:onClick="backSpaceAction"
             android:text="⌫" />
-        <Button
-            android:id="@+id/historybtn"
-            style="@style/buttonNumber"
-            android:textColor="@color/red"
-            android:text="Db"/>
+
         <Button
             style="@style/buttonOperator"
             android:text="/"/>
@@ -75,13 +77,13 @@
 
         <Button
             style="@style/buttonNumber"
-            android:text="7"/>
+            android:text="@string/seven" />
         <Button
             style="@style/buttonNumber"
-            android:text="8"/>
+            android:text="@string/eight"/>
         <Button
             style="@style/buttonNumber"
-            android:text="9"/>
+            android:text="@string/nine"/>
         <Button
             style="@style/buttonOperator"
             android:text="x"/>
@@ -93,13 +95,13 @@
 
         <Button
             style="@style/buttonNumber"
-            android:text="4"/>
+            android:text="@string/four"/>
         <Button
             style="@style/buttonNumber"
-            android:text="5"/>
+            android:text="@string/five"/>
         <Button
             style="@style/buttonNumber"
-            android:text="6"/>
+            android:text="@string/six"/>
         <Button
             style="@style/buttonOperator"
             android:text="-"/>
@@ -111,13 +113,13 @@
 
         <Button
             style="@style/buttonNumber"
-            android:text="1"/>
+            android:text="@string/one"/>
         <Button
             style="@style/buttonNumber"
-            android:text="2"/>
+            android:text="@string/two"/>
         <Button
             style="@style/buttonNumber"
-            android:text="3"/>
+            android:text="@string/three"/>
         <Button
             style="@style/buttonOperator"
             android:text="+" />
@@ -132,7 +134,7 @@
             android:text="."/>
         <Button
             style="@style/buttonNumber"
-            android:text="0"/>
+            android:text="@string/zero"/>
         <Button
             style="@style/buttonNumber"
             android:layout_weight="2"

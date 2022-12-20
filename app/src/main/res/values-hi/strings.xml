@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">कैलकुलेटर</string>
+    <string name="zero">०</string>
+    <string name="one">१</string>
+    <string name="two">२</string>
+    <string name="three">३</string>
+    <string name="four">४</string>
+    <string name="five">५</string>
+    <string name="six">६</string>
+    <string name="seven">७</string>
+    <string name="eight">८</string>
+    <string name="nine">९</string>
+    <string name="workingtv">" "</string>
+    <string name="resultTv">" "</string>
+
+
+    <string name="ac">एसी</string>
+    <string name="db">डीबी</string>
+</resources>
